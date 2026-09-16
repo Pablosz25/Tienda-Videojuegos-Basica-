@@ -1,6 +1,5 @@
 package tiendaVideojuegos;
 
 public enum Generos {
-
-	Accion,aventura,misterio,terror;
+	Accion,Aventura,RPG,Estrategia,Deportes,Simulador,Plataformas,Puzzles;
 }
