@@ -87,6 +87,7 @@ public class Juegos {
 			System.out.println("Si hay un total de " + this.stock + " unidades de stock ");
 		} else {
 			System.out.println("No hay stock disponible");
+			System.out.println("hola");
 		}
 
 	}
