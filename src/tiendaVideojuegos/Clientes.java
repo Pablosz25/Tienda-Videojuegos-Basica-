@@ -2,15 +2,15 @@ package tiendaVideojuegos;
 
 public class Clientes {
 
-	public int id;
-	public String nombre;
-	public Double saldo;
-	public Double saldoantiguo;
-	public Juegos Juegos;
+	private int id;
+	private static int contadorclientes = 0;
+	private String nombre;
+	private Double saldo;
+	private Double saldoantiguo;
 
-	public Clientes(int id, String nombre) {
+	public Clientes(String nombre) {
 
-		this.id = id++;
+		this.id = ++contadorclientes;
 		this.nombre = nombre;
 		this.saldo = 0.0;
 
@@ -30,7 +30,7 @@ public class Clientes {
 
 	public void aumentarsaldo(double saldo) {
 
-		if (saldo < 0) {
+		if (saldo > 0) {
 			this.saldo = this.saldo + saldo;
 			System.out.println("El nuevo saldo del cliente es de  " + this.saldo + "€");
 		} else {
@@ -43,26 +43,33 @@ public class Clientes {
 
 	public void restarsaldo(double saldo) {
 
-		saldoantiguo = this.saldo;
+		if (saldo > 0) {
 
-		this.saldo = this.saldo - saldo;
+			saldoantiguo = this.saldo;
 
-		if (this.saldo < 0) {
-			
-			this.saldo = saldoantiguo;
+			this.saldo = this.saldo - saldo;
 
-			System.out.println("El saldo es negativo por lo que se quedara en el saldo antiguo y se cancelara la compra");
+			if (this.saldo < 0) {
+
+				this.saldo = saldoantiguo;
+
+				System.out.println(
+						"El saldo es negativo por lo que se quedara en el saldo antiguo y se cancelara la compra");
+
+			} else {
+
+				System.out.println("El saldo actual es de " + this.saldo);
+			}
 
 		} else {
-
-			System.out.println("El saldo actual es de " + this.saldo);
+			System.out.println("El numero debe ser positivo para restarlo no negativo");
 		}
 
 	}
 
 	public boolean puedeComprar(Juegos Juegos) {
 
-		if (this.saldo >= Juegos.getPrecio() && Juegos.getStock() > 0) {
+		if (this.saldo >= Juegos.getPrecio() && Juegos.hayStock()) {
 			System.out.println("Puede comprar el juego");
 			return true;
 
