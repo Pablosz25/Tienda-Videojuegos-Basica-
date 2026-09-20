@@ -2,28 +2,41 @@ package tiendaVideojuegos;
 
 public class Compra {
 
-	public static void realizarCompra(Clientes cliente, Juegos juego, int cantidad) {
+	private int idJuego;
+	private int idCliente;
+	private double precioFinal;
+	private int cantidad;
 
-		if (cantidad <= 0) {
-			System.out.println("La cantidad tiene que ser mayor que 0");
-			return;
-		} else if (juego.getStock() < cantidad) {
-			System.out.println("No hay suficientes unidades disponibles");
-			return;
-		} else {
-			double precioFinal = juego.getPrecio() * cantidad;
-			if (cliente.getPresupuesto() < precioFinal) {
-				System.out.println("No tienes sufieinte dinero para poder comprarlo");
-				return;
-			} else {
-				cliente.restarsaldo(precioFinal);
-				juego.reducirStock(cantidad);
+	public Compra(Juegos juego, Clientes cliente,  int cantidad, double precioFinal) {
 
-				System.out
-						.println("Has comprado " + cantidad + " copias del juego por un total de " + precioFinal + "€");
-			}
-		}
+		this.idJuego = juego.getId();
+		this.idCliente = cliente.getId();
+		
+		this.cantidad = cantidad;
+		this.precioFinal = precioFinal;
 
+	}
+
+	public int getIdJuego() {
+		return idJuego;
+	}
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public double getPrecioFinal() {
+		return precioFinal;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	@Override
+	public String toString() {
+		return "Compra: Cliente ID " + idCliente + " | Juego ID " + idJuego + " | Cantidad: " + cantidad
+				+ " | Precio final: " + precioFinal + "€";
 	}
 
 }
